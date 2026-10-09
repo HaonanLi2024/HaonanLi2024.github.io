@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Haonan Li, PhD</title>
+<meta name="description" content="Haonan Li, PhD — Postdoctoral Fellow, Johns Hopkins Bloomberg School of Public Health. Environmental health, multi-omics, and early-life exposures.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Source+Sans+3:wght@400;600&display=swap">
+<style>
+/* Layout: printed-page feel. Identity column left, one reading column right; a quiet text nav on top. */
+:root{
+  --bg:#FBFBF9; --surface:#FFFFFF; --ink:#1C1C1A; --muted:#5E5D58; --line:#E4E2DC; --accent:#1F3F73; --accent-soft:#EEF1F6;
+  --hue-exp:#8A6A3B; --tint-exp:#E9DCC6; --hue-bio:#1E6A60; --tint-bio:#CFE5DF; --hue-out:#8E4A5C; --tint-out:#EBD6DC;
+  --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans:"Source Sans 3", "Helvetica Neue", Arial, sans-serif;
+  --display:var(--serif); --body:var(--serif); --mono:var(--sans);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#151618; --surface:#1B1C1F; --ink:#E7E5E0; --muted:#A4A29B; --line:#2E2F33; --accent:#A9BEE6; --accent-soft:#222833;
+  --hue-exp:#D2B07A; --tint-exp:#3A3020; --hue-bio:#7CC4B8; --tint-bio:#1B3A35; --hue-out:#D99AAA; --tint-out:#3B2530; color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#151618; --surface:#1B1C1F; --ink:#E7E5E0; --muted:#A4A29B; --line:#2E2F33; --accent:#A9BEE6; --accent-soft:#222833;
+  --hue-exp:#D2B07A; --tint-exp:#3A3020; --hue-bio:#7CC4B8; --tint-bio:#1B3A35; --hue-out:#D99AAA; --tint-out:#3B2530; color-scheme:dark; }
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.62 var(--serif);-webkit-font-smoothing:antialiased;font-optical-sizing:auto}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:2px;text-decoration-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+a:hover{text-decoration-color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+p{margin:0}
+
+.wrap{max-width:1100px;margin:0 auto;padding-inline:clamp(16px,4vw,40px);padding-block:clamp(28px,5vw,56px) 64px;
+  display:grid;grid-template-columns:250px minmax(0,1fr);gap:clamp(32px,6vw,80px)}
+@media (max-width: 860px){ .wrap{grid-template-columns:minmax(0,1fr);gap:36px} }
+
+/* Top navigation: plain text links, active one underlined */
+.topbar{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+.topbar-in{max-width:1100px;margin:0 auto;padding-inline:clamp(16px,4vw,40px);height:58px;display:flex;align-items:center;gap:28px}
+.brand{font:600 1.15rem/1 var(--serif);color:var(--ink);text-decoration:none;white-space:nowrap}
+.topnav{display:flex;gap:26px;overflow-x:auto;scrollbar-width:none;margin-left:auto;min-width:0}
+.topnav::-webkit-scrollbar{display:none}
+.topnav a{font:400 .95rem/1 var(--sans);color:var(--muted);text-decoration:none;padding:20px 0 17px;border-bottom:2px solid transparent;white-space:nowrap}
+.topnav a:hover{color:var(--ink)}
+.topnav a.active{color:var(--ink);border-bottom-color:var(--accent)}
+@media (max-width: 860px){ .brand{display:none} .topnav{margin-left:0;gap:20px} .topbar-in{height:50px} .topnav a{padding:16px 0 13px} }
+
+/* Sidebar */
+.side{align-self:start;position:sticky;top:calc(env(safe-area-inset-top,0px) + 86px);max-height:calc(100vh - 106px);overflow-y:auto;scrollbar-width:thin;display:flex;flex-direction:column;gap:20px;padding-bottom:8px}
+@media (max-width: 860px){ .side{position:static;max-height:none} }
+.portrait{width:190px;height:auto;flex:none;aspect-ratio:1;max-width:100%;border-radius:2px;object-fit:cover;display:block}
+.name{font:600 1.75rem/1.15 var(--serif);margin:14px 0 0}
+.role{margin:6px 0 0;color:var(--muted);font:400 .95rem/1.45 var(--sans)}
+.role b{color:var(--ink);font-weight:600}
+.links{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font:400 .93rem/1.4 var(--sans)}
+.links a{text-decoration:none;color:var(--ink);display:inline-flex;gap:10px;align-items:center}
+.links a:hover{color:var(--accent);text-decoration:underline}
+.links svg{width:15px;height:15px;flex:none;fill:var(--muted)}
+.email{display:flex;align-items:center;gap:10px;font:400 .93rem/1.4 var(--sans)}
+.email svg{width:15px;height:15px;fill:var(--muted);flex:none}
+.copy{font:400 .78rem/1 var(--sans);border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:2px;padding:4px 7px;cursor:pointer}
+.copy:hover{color:var(--accent);border-color:var(--accent)}
+@media (max-width: 860px){ .side-top{display:flex;gap:18px;align-items:center} .portrait{width:104px} .name{margin-top:0} }
+.side-news{border-top:1px solid var(--line);padding-top:16px;display:flex;flex-direction:column;gap:12px}
+.sn-h{font:600 1rem/1.2 var(--serif);color:var(--ink);margin:0}
+#sideNews{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+#sideNews li{display:flex;flex-direction:column;gap:2px;font:400 .88rem/1.45 var(--sans);color:var(--ink)}
+#sideNews .d{font:400 .8rem/1.3 var(--sans);color:var(--muted);font-variant-numeric:tabular-nums}
+#sideNews .x{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.sn-all{font:400 .9rem/1 var(--sans)}
+@media (max-width: 860px){ #sideNews li:nth-child(n+3){display:none} }
+
+/* Main column */
+main{min-width:0;display:flex;flex-direction:column;gap:56px}
+section{scroll-margin-top:84px}
+.eyebrow{display:none}
+h2{font:600 1.6rem/1.25 var(--serif);margin:0 0 20px;text-wrap:balance;padding-bottom:10px;border-bottom:1px solid var(--line)}
+h3{font:600 1.05rem/1.35 var(--serif);margin:0}
+.prose{max-width:68ch;display:flex;flex-direction:column;gap:14px}
+.lede{font:400 1.22rem/1.5 var(--serif);color:var(--ink);max-width:40ch}
+.lede em{font-style:italic;color:inherit}
+
+/* Research framework */
+.pathway{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch;gap:10px;margin:4px 0 34px}
+.stage{position:relative;background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--hue);border-radius:3px;padding:12px 16px 18px;min-width:0;color:var(--ink)}
+.stage .fig{display:block;width:100%;height:auto;max-width:100%;border-radius:2px;margin:0 0 14px;background:#fff;outline:1px solid #ECEEF1;outline-offset:-1px}
+.stage ul,.stage .tag{position:relative}
+.st-exp{--hue:var(--hue-exp);--tint:var(--tint-exp)}
+.st-bio{--hue:var(--hue-bio);--tint:var(--tint-bio)}
+.st-out{--hue:var(--hue-out);--tint:var(--tint-out)}
+.stage .tag{font:600 .98rem/1.2 var(--serif);color:var(--hue);margin-bottom:12px;display:block}
+.stage ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px;font:400 .92rem/1.4 var(--sans)}
+.stage li{position:relative;padding-left:14px}
+.stage li::before{content:"";position:absolute;left:0;top:.55em;width:5px;height:5px;border-radius:50%;background:var(--hue)}
+.arrow{align-self:center;display:block;width:30px}
+.arrow svg{display:block;width:100%;height:auto}
+@media (max-width: 640px){ .pathway{grid-template-columns:minmax(0,1fr)} .arrow{justify-self:center;transform:rotate(90deg)} }
+.themes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 36px}
+@media (max-width: 640px){ .themes{grid-template-columns:minmax(0,1fr)} }
+.theme{display:flex;flex-direction:column;gap:6px}
+.theme p{color:var(--muted);font-size:.97rem}
+.theme .key{font:italic 400 .9rem/1.45 var(--serif);color:var(--muted)}
+
+/* Publications */
+.metrics{display:flex;flex-wrap:wrap;gap:6px 24px;margin:0 0 18px;font:400 .92rem/1.4 var(--sans);color:var(--muted)}
+.metrics b{font-weight:600;color:var(--ink);margin-right:4px;font-variant-numeric:tabular-nums}
+.filter{display:inline-flex;gap:18px;margin-bottom:22px}
+.filter button{font:400 .95rem/1 var(--sans);padding:4px 0;border:0;border-bottom:2px solid transparent;background:transparent;color:var(--muted);cursor:pointer}
+.filter button[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.year{font:600 1.05rem/1 var(--serif);color:var(--ink);margin:28px 0 12px}
+.year:first-of-type{margin-top:0}
+.pubs{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.pub{display:grid;grid-template-columns:1.2rem minmax(0,1fr);gap:4px;font-size:.97rem;line-height:1.5}
+.pub .mk{color:var(--accent);font:400 .9rem/1.6 var(--sans)}
+.pub .t{color:var(--ink)}
+.pub .a{color:var(--muted);font:400 .9rem/1.5 var(--sans)}
+.pub .a b{color:var(--ink);font-weight:600}
+.pub .j{font-style:italic}
+.pub .doi{font:400 .85rem/1.4 var(--sans);word-break:break-all}
+.note{font:400 .88rem/1.5 var(--sans);color:var(--muted);margin-top:20px}
+
+/* Dated lists */
+.rows{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.rows li{display:grid;grid-template-columns:7rem minmax(0,1fr);gap:18px;padding:11px 0;border-top:1px solid var(--line);font-size:.97rem}
+.rows li:first-child{border-top:0;padding-top:0}
+.rows .when{font:400 .9rem/1.7 var(--sans);color:var(--muted);font-variant-numeric:tabular-nums}
+.rows .sub{display:block;color:var(--muted);font:400 .9rem/1.5 var(--sans);margin-top:2px}
+@media (max-width: 480px){ .rows li{grid-template-columns:minmax(0,1fr);gap:2px} }
+.pill{font:italic 400 .9em/1 var(--serif);color:var(--muted);margin-left:4px}
+.pill::before{content:"("} .pill::after{content:")"}
+.pill{text-transform:lowercase}
+.news .ntag{font:400 .82rem/1 var(--sans);color:var(--muted);margin-right:8px;font-variant:small-caps;text-transform:lowercase;letter-spacing:.04em}
+.news .ntag::after{content:" ·"}
+.more-btn{margin-top:14px;font:400 .93rem/1 var(--sans);padding:0;border:0;background:transparent;color:var(--accent);cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px}
+@media (max-width: 720px){ .cols{grid-template-columns:minmax(0,1fr)} }
+.cols h3{margin-bottom:10px}
+.plain{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:.97rem}
+.plain .sub{color:var(--muted)}
+.outdoors{border-top:1px solid var(--line);padding-top:18px;display:flex;flex-direction:column;gap:8px;max-width:68ch}
+.outdoors p{color:var(--muted);font-style:italic}
+
+/* Training */
+.stages-train{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px;margin:0 0 28px}
+@media (max-width: 720px){ .stages-train{grid-template-columns:minmax(0,1fr)} }
+.tr-block{display:flex;flex-direction:column;gap:6px;min-width:0}
+.tr-block p{color:var(--ink);font-size:.97rem}
+.tr-block .tr-where{font:600 1.05rem/1.3 var(--serif)}
+.tr-where span{font:400 .88rem/1 var(--sans);color:var(--muted);margin-left:8px}
+.skills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 36px}
+@media (max-width: 640px){ .skills{grid-template-columns:minmax(0,1fr)} }
+.skill{min-width:0}
+.skill h3{margin-bottom:8px}
+.skill .plain{font:400 .93rem/1.5 var(--sans);color:var(--muted);gap:6px}
+
+/* Photos */
+.talk-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 14px;margin:0 0 28px}
+@media (max-width: 640px){ .talk-gallery{grid-template-columns:minmax(0,1fr)} }
+.shot{margin:0;display:flex;flex-direction:column;gap:6px;min-width:0}
+.shot img{width:100%;max-width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;border-radius:2px;display:block;background:var(--accent-soft)}
+.shot.poster img{aspect-ratio:4/3;object-position:top;background:#fff;outline:1px solid var(--line);outline-offset:-1px}
+.shot figcaption,.slide figcaption{font:italic 400 .88rem/1.4 var(--serif);color:var(--muted)}
+.carousel{margin:0 0 30px}
+.car-view{position:relative}
+.car-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;overscroll-behavior-x:contain}
+.car-track::-webkit-scrollbar{display:none}
+@media (prefers-reduced-motion: reduce){ .car-track{scroll-behavior:auto} }
+.slide{flex:0 0 100%;scroll-snap-align:start;margin:0;display:flex;flex-direction:column;gap:8px;min-width:0}
+.slide img{width:100%;max-width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:2px;display:block;background:var(--accent-soft)}
+.car-btn{position:absolute;top:calc((100% - 1.6rem) / 2);transform:translateY(-50%);width:38px;height:38px;border-radius:2px;border:0;background:rgba(20,20,20,.45);color:#fff;display:grid;place-items:center;cursor:pointer}
+.car-btn:hover{background:rgba(20,20,20,.7)}
+.car-btn:disabled{opacity:.25;cursor:default}
+.car-btn svg{width:18px;height:18px}
+.car-btn.prev{left:0}.car-btn.next{right:0}
+.car-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:8px}
+.car-dots{display:flex;gap:6px}
+.car-dots button{width:18px;height:3px;padding:0;border:0;background:var(--line);cursor:pointer}
+.car-dots button[aria-selected="true"]{background:var(--ink)}
+.car-count{font:400 .85rem/1 var(--sans);color:var(--muted);font-variant-numeric:tabular-nums}
+
+main > section{animation:fadein .2s ease}
+@keyframes fadein{from{opacity:.5}to{opacity:1}}
+@media (prefers-reduced-motion: reduce){ main > section{animation:none} }
+footer{border-top:1px solid var(--line);padding-top:16px;font:400 .85rem/1.5 var(--sans);color:var(--muted)}
+</style>
+</head>
+<body>
+
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="#about">Haonan Li</a>
+    <nav class="topnav" aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#experience">Education &amp; Training</a>
+      <a href="#research">Research &amp; Publications</a>
+      <a href="#talks">Talks</a>
+      <a href="#service">Service &amp; Mentoring</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap">
+  <aside class="side" aria-label="Profile">
+    <div class="side-top">
+      <img class="portrait" src="photo.jpg" alt="Portrait of Haonan Li outdoors" width="168" height="168">
+      <div>
+        <h1 class="name">Haonan Li, PhD</h1>
+        <p class="role"><b>Postdoctoral Fellow</b><br>Environmental Epidemiology · Multi-omics<br>Johns Hopkins Bloomberg School of Public Health</p>
+      </div>
+    </div>
+
+    <div class="email">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3V5zm2 2v.4l7 4.6 7-4.6V7H5zm14 2.8-7 4.6-7-4.6V17h14V9.8z"/></svg>
+      <span id="addr">hli263@jh.edu</span>
+      <button class="copy" id="copyBtn" type="button" aria-label="Copy email address">Copy</button>
+    </div>
+
+    <ul class="links">
+      <li><a href="https://scholar.google.com/citations?user=2-4S3q4AAAAJ" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 1 9l11 6 9-4.9V17h2V9L12 3zm-6.5 9.6V16c0 2.2 2.9 4 6.5 4s6.5-1.8 6.5-4v-3.4L12 16.1l-6.5-3.5z"/></svg>Google Scholar</a></li>
+      <li><a href="https://orcid.org/0000-0003-1954-641X" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM8.3 17H6.7V9.4h1.6V17zM7.5 8.4a1 1 0 1 1 0-2 1 1 0 0 1 0 2zM17.6 13.2c0 2.2-1.6 3.8-4 3.8H10.6V9.4h3c2.4 0 4 1.6 4 3.8zm-1.7 0c0-1.5-1-2.4-2.5-2.4h-1.2v4.8h1.2c1.5 0 2.5-.9 2.5-2.4z"/></svg>ORCID 0000-0003-1954-641X</a></li>
+      <li><a href="https://www.linkedin.com/in/haonan-li-767595348/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm1.8 6.5V18h2.7V9.5H5.8zm1.4-4.1a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2zM10.3 9.5V18H13v-4.3c0-1.1.2-2.2 1.6-2.2s1.4 1.3 1.4 2.3V18h2.7v-4.7c0-2.3-.5-4-3.2-4a2.8 2.8 0 0 0-2.5 1.4V9.5h-2.7z"/></svg>LinkedIn</a></li>
+      <li><a href="CV_Haonan_Li.pdf" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h8l5 5v15H6V2zm7 1.5V8h4.5L13 3.5zM8.5 12v1.5h8V12h-8zm0 3v1.5h8V15h-8zm0 3v1.5h5V18h-5z"/></svg>Curriculum vitae (PDF)</a></li>
+    </ul>
+
+    <div class="side-news" aria-labelledby="sn-h">
+      <p class="sn-h" id="sn-h">Recent news</p>
+      <ul id="sideNews"></ul>
+      <a class="sn-all" href="#news">All news →</a>
+    </div>
+  </aside>
+
+  <main>
+    <section id="about" aria-labelledby="about-h">
+      <p class="eyebrow">About</p>
+      <div class="prose">
+        <p class="lede" id="about-h">I study how environmental exposures alter <em>microbial and metabolic processes</em> to shape neurological and cardiometabolic health.</p>
+        <p>I am a postdoctoral fellow in the Department of Environmental Health and Engineering at the Johns Hopkins Bloomberg School of Public Health, working with Associate Professor <a href="https://publichealth.jhu.edu/faculty/4819/tanya-alderete" target="_blank" rel="noopener">Tanya L. Alderete</a> in the <a href="https://eclipselab.science/" target="_blank" rel="noopener">ECLIPSE Lab</a>. My research integrates environmental epidemiology with multi-omics, including signaling lipidomics, metabolomics, and gut microbiome profiling, to investigate how environmental exposures shape human health in longitudinal cohorts.</p>
+        <p>My path into environmental health began with a fascination for living systems. At Xiamen University, I trained in marine biology and studied extracellular vesicles released by marine bacteria. At Peking University, under the mentorship of <a href="http://scholar.pku.edu.cn/tongzhu" target="_blank" rel="noopener">Professor Tong Zhu</a>, I developed LC-MS/MS methods to quantify low-abundance signaling lipids and applied them in longitudinal panel studies of middle-aged and older adults to investigate how air pollution and ambient temperature alter pathways involved in inflammation, thrombosis, and atherosclerosis. This training spanned the full environmental health research process, from designing field panel studies and monitoring air pollution to processing biospecimens, operating LC-MS instruments, and conducting statistical analyses.</p>
+        <p>At Johns Hopkins, I have expanded my research to birth cohorts, examining air pollution constituents and sources, per- and polyfluoroalkyl substances (PFAS), and the broader chemical exposome in relation to human milk composition, metabolomic profiles, the infant gut microbiome, and neurodevelopment. I contribute to several studies funded by the National Institutes of Health (NIH) and am a member of the <a href="https://www.nih.gov/echo" target="_blank" rel="noopener">Environmental influences on Child Health Outcomes (ECHO)</a> <a href="https://www.nih.gov/echo/program-components/echo-data-analysis-center" target="_blank" rel="noopener">Data Analysis Center</a> and the <a href="https://www.jhu-charmed.com/" target="_blank" rel="noopener">Johns Hopkins NIEHS P30 CHARMED Center</a>.</p>
+      </div>
+    </section>
+
+    <section id="news" aria-labelledby="news-h">
+      <p class="eyebrow">News</p>
+      <h2 id="news-h">Recent news</h2>
+      <ul class="rows news">
+        <li><span class="when">Sep 2026</span><span><span class="ntag t-talk">Talk</span>Gave an invited talk with Dr. Tanya L. Alderete on PFAS in human milk, the infant gut microbiome, and neurodevelopment at the Boya International Forum on Environmental Research, Peking University.</span></li>
+        <li><span class="when">Sep 2026</span><span><span class="ntag t-paper">Paper</span>First-author paper on PM<sub>2.5</sub> components, liver fat and stiffness, and PNPLA3 genotype in youth published in <a href="https://doi.org/10.1016/j.envint.2026.110438" target="_blank" rel="noopener"><i>Environment International</i></a>.</span></li>
+        <li><span class="when">Aug 2026</span><span><span class="ntag t-talk">Talk</span>Oral presentation at ISEE 2026 in Munich on gut microbiome and fecal metabolome signatures linking prenatal PM<sub>2.5</sub> component mixtures and child neurodevelopment.</span></li>
+        <li><span class="when">Jul 2026</span><span><span class="ntag t-talk">Talk</span>Delivered the Leslie Isaacs Special Lecture on the microbiome at the Johns Hopkins Sherrilyn and Ken Fisher Center for Environmental Infectious Diseases.</span></li>
+        <li><span class="when">Jul 2026</span><span><span class="ntag t-poster">Poster</span>Presented work on PM<sub>2.5</sub> components and youth liver health at the ISEE North American Chapter Conference in Baltimore.</span></li>
+        <li><span class="when">Apr 2026</span><span><span class="ntag t-poster">Poster</span>Presented work on PM<sub>2.5</sub> components and youth liver health at the HEI Annual Conference in Chicago.</span></li>
+        <li><span class="when">Mar 2026</span><span><span class="ntag t-paper">Paper</span>First-author paper on prenatal PM<sub>2.5</sub> mixtures and early childhood neurodevelopment published in <a href="https://doi.org/10.1186/s12989-025-00657-2" target="_blank" rel="noopener"><i>Particle and Fibre Toxicology</i></a>.</span></li>
+        <li><span class="when">Feb 2026</span><span><span class="ntag t-service">Service</span>Joined the Johns Hopkins NIEHS P30 CHARMED Center.</span></li>
+        <li class="more" hidden><span class="when">Aug 2025</span><span><span class="ntag t-talk">Talk</span>Oral presentation at the ISES–ISEE 2025 Joint Annual Meeting in Atlanta on PM<sub>2.5</sub> components and early childhood neurodevelopment.</span></li>
+        <li class="more" hidden><span class="when">Feb 2025</span><span><span class="ntag t-paper">Paper</span>First-author paper on lysoglycerophospholipid alterations and PM<sub>2.5</sub> exposure published in <a href="https://doi.org/10.1016/j.envpol.2025.125646" target="_blank" rel="noopener"><i>Environmental Pollution</i></a>.</span></li>
+        <li class="more" hidden><span class="when">Oct 2024</span><span><span class="ntag t-career">Career</span>Joined the Department of Environmental Health and Engineering at the Johns Hopkins Bloomberg School of Public Health as a postdoctoral fellow.</span></li>
+        <li class="more" hidden><span class="when">Jul 2023</span><span><span class="ntag t-career">Career</span>Received my PhD in Environmental Health from Peking University.</span></li>
+      </ul>
+      <button class="more-btn" id="newsMore" type="button" aria-expanded="false" aria-controls="news-h">Show all news (12)</button>
+    </section>
+
+    <section id="experience" aria-labelledby="exp-h">
+      <p class="eyebrow">Education</p>
+      <h2 id="exp-h">Education and honors</h2>
+      <ul class="rows">
+        <li><span class="when">2024–present</span><span>Postdoctoral Fellow<span class="sub">Johns Hopkins Bloomberg School of Public Health · Environmental epidemiology, gut microbiome · Mentor: Tanya L. Alderete, PhD</span></span></li>
+        <li><span class="when">2018–2023</span><span>PhD, Environmental Health<span class="sub">Peking University · Environmental epidemiology, signaling lipidomics, metabolomics, air pollution · Mentor: Tong Zhu, PhD</span></span></li>
+        <li><span class="when">2014–2018</span><span>BS, Marine Biology<span class="sub">Xiamen University · Environmental microbiology</span></span></li>
+      </ul>
+      <div class="cols" style="margin-top:36px">
+        <div>
+          <h3>Honors</h3>
+          <ul class="plain">
+            <li>Award for Scientific Research <span class="sub">· Peking University, 2022</span></li>
+            <li>Outstanding Graduate Award <span class="sub">· Xiamen University, 2018</span></li>
+            <li>National Scholarship <span class="sub">· Ministry of Education of China, 2016</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Memberships</h3>
+          <ul class="plain">
+            <li>NIEHS P30 CHARMED Center, Johns Hopkins</li>
+            <li>International Society of Exposure Science (ISES)</li>
+            <li>International Society for Environmental Epidemiology (ISEE)</li>
+            <li>American Society for Mass Spectrometry (ASMS)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="training" data-group="experience" aria-labelledby="train-h">
+      <p class="eyebrow">Training</p>
+      <h2 id="train-h">From field sampling to population-scale omics</h2>
+      <div class="stages-train">
+        <div class="tr-block">
+          <p class="tr-where">Peking University <span>2018–2023</span></p>
+          <p>My doctoral program was housed in the College of Environmental Sciences and Engineering, where the program later established China's first Department of Environmental Health. Training there spanned exposure science, environmental epidemiology, toxicology, instrumental analysis, mass spectrometry, and biostatistics, and I applied each of them in the field and at the bench.</p>
+        </div>
+        <div class="tr-block">
+          <p class="tr-where">Johns Hopkins University <span>2024–present</span></p>
+          <p>At Johns Hopkins, my training has extended from the bench to population-scale multi-omics in birth cohorts. I analyze shotgun metagenomic, fecal metabolomic, and human milk metabolome and oligosaccharide data from a Southern California birth cohort and work with harmonized neurodevelopmental data across ECHO cohorts, applying mixture, mediation, and high-dimensional methods to longitudinal outcomes.</p>
+        </div>
+      </div>
+      <div class="carousel" id="fieldCarousel" role="region" aria-roledescription="carousel" aria-label="Field and laboratory photos">
+        <div class="car-view">
+          <div class="car-track" tabindex="0">
+            <!-- To add a photo: copy one figure.slide block below and change src, alt, and caption. -->
+            <figure class="slide"><img src="field-tibet-team.jpg" alt="Haonan Li with the STEP field research team at dusk on the Tibetan Plateau, with Himalayan peaks in the background" width="1600" height="900"><figcaption>With the field team on the Second Tibetan Plateau Scientific Expedition and Research (STEP) program</figcaption></figure>
+            <figure class="slide"><img src="field-lab-records.jpg" alt="Haonan Li recording sample information next to racks of blood collection tubes in a field laboratory" width="1600" height="900"><figcaption>Logging biospecimens in the field laboratory during the STEP expedition</figcaption></figure>
+            <figure class="slide"><img src="field-lab-samples.jpg" alt="Haonan Li processing samples at a field station during the STEP expedition" width="1600" height="900"><figcaption>Processing biospecimens at the field station</figcaption></figure>
+          </div>
+          <button class="car-btn prev" type="button" aria-label="Previous photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button class="car-btn next" type="button" aria-label="Next photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+        <div class="car-foot"><div class="car-dots" role="tablist" aria-label="Choose photo"></div><span class="car-count" aria-live="polite"></span></div>
+      </div>
+      <div class="skills">
+        <div class="skill">
+          <h3>Field studies</h3>
+          <ul class="plain">
+            <li>Design and implementation of longitudinal panel studies</li>
+            <li>High-altitude fieldwork with the Second Tibetan Plateau Scientific Expedition and Research (STEP) program</li>
+            <li>Air pollution sampling in field campaigns</li>
+            <li>Operation and maintenance of air pollution monitoring instruments</li>
+            <li>Field visits and cardiopulmonary health assessments</li>
+          </ul>
+        </div>
+        <div class="skill">
+          <h3>Laboratory</h3>
+          <ul class="plain">
+            <li>LC-MS/MS on triple quadrupole (QqQ) and Q-TOF platforms</li>
+            <li>Targeted method development and validation for signaling lipids</li>
+            <li>Sample preparation for metabolomics and transcriptomics</li>
+            <li>Flow cytometry, ultracentrifugation, PCR</li>
+          </ul>
+        </div>
+        <div class="skill">
+          <h3>Data analysis</h3>
+          <ul class="plain">
+            <li>Mixed-effects and distributed lag nonlinear models</li>
+            <li>Environmental mixture and high-dimensional mediation analysis</li>
+            <li>Metabolomics preprocessing, pathway enrichment, microbiome analysis</li>
+            <li>Shotgun metagenomics: taxonomic and functional profiling</li>
+            <li>Multi-omics integration and visualization in R</li>
+          </ul>
+        </div>
+        <div class="skill">
+          <h3>Coursework &amp; workshops</h3>
+          <ul class="plain">
+            <li>The Human Microbiome in Health and Disease (PH.260.610), Johns Hopkins</li>
+            <li>Multi-Omics Data Integration in Human Exposome Studies, ISGlobal, 2026</li>
+            <li>mixOmics Beginner Workshop</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="research" aria-labelledby="research-h">
+      <p class="eyebrow">Research</p>
+      <h2 id="research-h">From exposure to biology to health</h2>
+
+      <div class="pathway" role="group" aria-label="Research framework: exposures, biological pathways, health outcomes">
+        <div class="stage st-exp">
+          <svg class="fig" viewBox="0 0 240 130" role="img" aria-label="Illustration: factory and traffic emissions, airborne particles, PFAS molecule, and a thermometer" stroke-linejoin="round" stroke-linecap="round">
+<rect x="0" y="0" width="240" height="130" fill="#FFFFFF"/>
+<path d="M8 113 H232" stroke="#D1D5DB" stroke-width="2"/>
+<g stroke="#9CA3AF" stroke-width="1.4" fill="#EEF0F3"><circle cx="70" cy="27" r="6"/><circle cx="80" cy="18" r="8"/><circle cx="95" cy="12" r="9"/></g>
+<rect x="62" y="33" width="10" height="34" rx="1.5" fill="#B8C2CE" stroke="#4B5563" stroke-width="1.6"/>
+<path d="M18 112 V66 L32 56 V66 L46 56 V66 L60 56 V66 H78 V112 Z" fill="#CBD5E1" stroke="#4B5563" stroke-width="1.6"/>
+<g fill="#FDE68A" stroke="#4B5563" stroke-width="1.1"><rect x="25" y="76" width="9" height="9" rx="1"/><rect x="42" y="76" width="9" height="9" rx="1"/><rect x="59" y="76" width="9" height="9" rx="1"/><rect x="25" y="93" width="9" height="9" rx="1"/><rect x="59" y="93" width="9" height="9" rx="1"/></g>
+<rect x="40" y="94" width="13" height="18" fill="#94A3B8" stroke="#4B5563" stroke-width="1.3"/>
+<path d="M92 104 V95 Q92 90 97 90 L105 90 L113 80 H133 L142 90 H146 Q151 90 151 95 V104 Z" fill="#7FB3FF" stroke="#2F5FB3" stroke-width="1.6"/>
+<path d="M115 82 H131 L138 90 H109 Z" fill="#DCEBFF" stroke="#2F5FB3" stroke-width="1.2"/>
+<g fill="#374151" stroke="#111827" stroke-width="1.2"><circle cx="106" cy="105" r="7"/><circle cx="138" cy="105" r="7"/></g>
+<g fill="#D1D5DB"><circle cx="106" cy="105" r="2.5"/><circle cx="138" cy="105" r="2.5"/></g>
+<g fill="#E5E7EB" stroke="#9CA3AF" stroke-width="1"><circle cx="86" cy="100" r="3"/><circle cx="79" cy="96" r="4"/></g>
+<g stroke-width="1.2"><circle cx="122" cy="40" r="6" fill="#D69E2E" stroke="#8A5A12"/><circle cx="135" cy="33" r="4" fill="#A47148" stroke="#5E3B1E"/><circle cx="112" cy="52" r="3.5" fill="#F6AD55" stroke="#9C5A12"/><circle cx="140" cy="49" r="5" fill="#8D6E63" stroke="#4E342E"/><circle cx="128" cy="58" r="2.6" fill="#D69E2E" stroke="#8A5A12"/><circle cx="148" cy="38" r="2.4" fill="#F6AD55" stroke="#9C5A12"/><circle cx="116" cy="30" r="2.2" fill="#8D6E63" stroke="#4E342E"/></g>
+<polyline points="160,72 168,64 176,72 184,64 192,72" fill="none" stroke="#374151" stroke-width="2"/>
+<g stroke="#9CA3AF" stroke-width="1.2"><line x1="168" y1="64" x2="168" y2="55"/><line x1="184" y1="64" x2="184" y2="55"/><line x1="176" y1="72" x2="176" y2="81"/><line x1="160" y1="72" x2="160" y2="81"/><line x1="192" y1="72" x2="192" y2="81"/></g>
+<g fill="#86EFAC" stroke="#15803D" stroke-width="1.2"><circle cx="168" cy="52" r="4"/><circle cx="184" cy="52" r="4"/><circle cx="176" cy="84" r="4"/><circle cx="160" cy="84" r="4"/><circle cx="192" cy="84" r="4"/></g>
+<rect x="203" y="18" width="13" height="74" rx="6.5" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.6"/>
+<rect x="206.5" y="44" width="6" height="52" rx="3" fill="#F87171"/>
+<circle cx="209.5" cy="99" r="11" fill="#F87171" stroke="#B91C1C" stroke-width="1.6"/>
+<g stroke="#6B7280" stroke-width="1.2"><line x1="216" y1="30" x2="221" y2="30"/><line x1="216" y1="42" x2="221" y2="42"/><line x1="216" y1="54" x2="221" y2="54"/><line x1="216" y1="66" x2="221" y2="66"/></g>
+</svg>
+          <span class="tag">Exposures</span>
+          <ul><li>PM<sub>2.5</sub> components and sources</li><li>PFAS and other chemicals</li><li>Ozone and ambient temperature</li></ul>
+        </div>
+        <span class="arrow" aria-hidden="true"><svg viewBox="0 0 34 24"><path d="M2 8.5 H20 V3 L32 12 L20 21 V15.5 H2 Z" fill="#B8C0CC" stroke="#8792A2" stroke-width="1.4" stroke-linejoin="round"/></svg></span>
+        <div class="stage st-bio">
+          <svg class="fig" viewBox="0 0 240 130" role="img" aria-label="Illustration: intestine with gut bacteria, a milk drop with oligosaccharide symbols, and a blood tube" stroke-linejoin="round" stroke-linecap="round">
+<rect x="0" y="0" width="240" height="130" fill="#FFFFFF"/>
+<path d="M22 66 Q22 36 52 36 H74 Q94 36 94 54 Q94 70 76 70 H58 Q42 70 42 84 Q42 100 60 100 H104" fill="none" stroke="#D9657F" stroke-width="16"/>
+<path d="M22 66 Q22 36 52 36 H74 Q94 36 94 54 Q94 70 76 70 H58 Q42 70 42 84 Q42 100 60 100 H104" fill="none" stroke="#FBC8D2" stroke-width="12"/>
+<path d="M22 66 V108" stroke="#D9657F" stroke-width="16"/><path d="M22 66 V108" stroke="#FBC8D2" stroke-width="12"/>
+<g stroke-width="1.2"><rect x="44" y="31" width="13" height="7" rx="3.5" fill="#86EFAC" stroke="#15803D" transform="rotate(-12 50 34)"/><rect x="70" y="64" width="12" height="6" rx="3" fill="#C4B5FD" stroke="#6D28D9" transform="rotate(15 76 67)"/><rect x="60" y="96" width="13" height="7" rx="3.5" fill="#86EFAC" stroke="#15803D"/><circle cx="85" cy="100" r="3.4" fill="#FDBA74" stroke="#C2410C"/><circle cx="90" cy="52" r="3.2" fill="#C4B5FD" stroke="#6D28D9"/><circle cx="24" cy="88" r="3.2" fill="#FDBA74" stroke="#C2410C"/></g>
+<g stroke-width="1.2"><rect x="104" y="20" width="12" height="6" rx="3" fill="#86EFAC" stroke="#15803D" transform="rotate(25 110 23)"/><circle cx="102" cy="82" r="3" fill="#C4B5FD" stroke="#6D28D9"/></g>
+<path d="M148 22 C148 22 128 50 128 64 a20 20 0 0 0 40 0 C168 50 148 22 148 22 Z" fill="#FFF7E8" stroke="#C99A5B" stroke-width="1.8"/>
+<path d="M139 66 a9 9 0 0 0 7 9" fill="none" stroke="#C99A5B" stroke-width="1.4"/>
+<g stroke="#4B5563" stroke-width="1.3"><line x1="130" y1="104" x2="146" y2="104"/><line x1="146" y1="104" x2="160" y2="104"/><line x1="146" y1="104" x2="146" y2="92"/></g>
+<circle cx="130" cy="104" r="5" fill="#3B82F6" stroke="#1E40AF" stroke-width="1.2"/>
+<circle cx="146" cy="104" r="5" fill="#FACC15" stroke="#A16207" stroke-width="1.2"/>
+<polygon points="146,85 152,95 140,95" fill="#EF4444" stroke="#991B1B" stroke-width="1.2"/>
+<rect x="155" y="99" width="10" height="10" fill="#3B82F6" stroke="#1E40AF" stroke-width="1.2"/>
+<rect x="196" y="14" width="22" height="12" rx="2" fill="#A78BFA" stroke="#5B21B6" stroke-width="1.5"/>
+<path d="M199 26 V100 a8 8 0 0 0 16 0 V26 Z" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.6"/>
+<path d="M200.5 56 H213.5 V100 a6.5 6.5 0 0 1 -13 0 Z" fill="#E05252"/>
+<g fill="none" stroke="#1E6A60" stroke-width="1.5"><polygon points="182,62 188,58.5 194,62 194,69 188,72.5 182,69"/><polyline points="194,62 200,58.5" /></g>
+</svg>
+          <span class="tag">Biological pathways</span>
+          <ul><li>Signaling lipids and the metabolome</li><li>Human milk composition</li><li>Gut microbiome</li></ul>
+        </div>
+        <span class="arrow" aria-hidden="true"><svg viewBox="0 0 34 24"><path d="M2 8.5 H20 V3 L32 12 L20 21 V15.5 H2 Z" fill="#B8C0CC" stroke="#8792A2" stroke-width="1.4" stroke-linejoin="round"/></svg></span>
+        <div class="stage st-out">
+          <svg class="fig" viewBox="0 0 240 130" role="img" aria-label="Illustration: a child, the brain, the heart, and the liver" stroke-linejoin="round" stroke-linecap="round">
+<rect x="0" y="0" width="240" height="130" fill="#FFFFFF"/>
+<path d="M8 113 H70" stroke="#D1D5DB" stroke-width="2"/>
+<rect x="27" y="86" width="9" height="26" rx="3" fill="#475569" stroke="#1F2937" stroke-width="1.3"/><rect x="40" y="86" width="9" height="26" rx="3" fill="#475569" stroke="#1F2937" stroke-width="1.3"/>
+<rect x="23" y="54" width="30" height="36" rx="10" fill="#93C5FD" stroke="#2563EB" stroke-width="1.6"/>
+<circle cx="38" cy="40" r="12" fill="#FCD9B8" stroke="#B07A55" stroke-width="1.6"/>
+<path d="M26 38 Q27 26 38 26 Q50 26 50 37 Q44 31 34 33 Q29 34 26 38 Z" fill="#3F2A1D" stroke="#3F2A1D" stroke-width="1"/>
+<g fill="#3F2A1D"><circle cx="34" cy="42" r="1.4"/><circle cx="42" cy="42" r="1.4"/></g>
+<path d="M34.5 47 Q38 49.5 41.5 47" fill="none" stroke="#B07A55" stroke-width="1.3"/>
+<path d="M94 58 C82 58 78 46 85 40 C83 30 93 24 101 28 C106 20 120 20 124 28 C132 23 144 28 143 38 C152 42 151 56 142 59 C142 68 132 72 125 67 C119 74 106 73 102 66 C96 68 90 64 94 58 Z" fill="#F9C6D3" stroke="#C2557A" stroke-width="1.7"/>
+<g fill="none" stroke="#C2557A" stroke-width="1.4"><path d="M114 26 Q110 40 116 48 Q121 56 114 66"/><path d="M96 38 Q104 38 106 46"/><path d="M130 34 Q124 42 132 48"/><path d="M98 54 Q106 52 108 58"/><path d="M134 56 Q128 56 126 62"/></g>
+<path d="M114 66 Q116 76 112 82" fill="none" stroke="#C2557A" stroke-width="3"/>
+<path d="M196 70 C178 58 168 48 168 37 C168 28 175 22 183 22 C189 22 194 26 196 31 C198 26 203 22 209 22 C217 22 224 28 224 37 C224 48 214 58 196 70 Z" fill="#F87171" stroke="#B91C1C" stroke-width="1.7"/>
+<path d="M188 22 V12 M198 24 V10 M206 22 V14" stroke="#B91C1C" stroke-width="3"/>
+<path d="M180 36 Q184 30 190 32" fill="none" stroke="#FECACA" stroke-width="2"/>
+<path d="M150 92 C150 80 166 76 186 78 C206 80 222 82 222 90 C222 100 206 110 186 112 C170 113 150 106 150 92 Z" fill="#C97B63" stroke="#7F3B2A" stroke-width="1.7"/>
+<path d="M186 79 Q184 96 190 111" fill="none" stroke="#7F3B2A" stroke-width="1.3"/>
+<path d="M164 88 Q170 84 178 86" fill="none" stroke="#E7A992" stroke-width="2"/>
+</svg>
+          <span class="tag">Health outcomes</span>
+          <ul><li>Child neurodevelopment</li><li>Liver and cardiometabolic health</li><li>Cardiovascular risk</li></ul>
+        </div>
+      </div>
+
+      <div class="themes">
+        <article class="theme">
+          <h3>Early-life exposures and child neurodevelopment</h3>
+          <p>Resolving prenatal PM<sub>2.5</sub> into its chemical components to identify which constituents and sources matter for early neurodevelopment, and how gut microbial and fecal metabolic pathways may link them.</p>
+          <span class="key">Nickel, vanadium, copper · ship-fuel combustion and traffic · El Sendero, ECHO</span>
+        </article>
+        <article class="theme">
+          <h3>Environmental chemicals and human milk</h3>
+          <p>Characterizing PFAS in human milk as an early-life exposure pathway, and how they relate to milk metabolites, human milk oligosaccharides, and the developing infant gut microbiome.</p>
+          <span class="key">PFAS · HMOs · milk metabolome · infant microbiome</span>
+        </article>
+        <article class="theme">
+          <h3>Air pollution and metabolic health in youth</h3>
+          <p>Integrating PM<sub>2.5</sub> components with serum metabolomics and lipidomics, hepatic imaging, and genotype to identify hepatotoxic components and susceptible groups.</p>
+          <span class="key">Liver fat and stiffness · PNPLA3 · metabolic mediators</span>
+        </article>
+        <article class="theme">
+          <h3>Signaling lipidomics for population studies</h3>
+          <p>Developing sensitive, high-throughput LC-MS/MS methods for oxylipins, sphingolipids, and lysoglycerophospholipids, and applying them to panel studies of air pollution and temperature.</p>
+          <span class="key">HILIC-MS/MS · online SPE-LC-MS/MS · cardiovascular pathways</span>
+        </article>
+      </div>
+    </section>
+
+
+
+    <section id="publications" data-group="research" aria-labelledby="pubs-h">
+      <p class="eyebrow">Publications</p>
+      <h2 id="pubs-h">Peer-reviewed articles</h2>
+      <p class="metrics"><span><b>26</b>publications</span><span><b>381</b>citations</span><span><b>12</b>h-index</span><span><b>15</b>i10-index</span><span>Google Scholar, October 2026</span></p>
+      <div class="filter" role="group" aria-label="Filter publications">
+        <button type="button" id="f-all" aria-pressed="true">All</button>
+        <button type="button" id="f-first" aria-pressed="false">First / co-first author</button>
+      </div>
+      <div id="publist"></div>
+      <p class="note"><span style="color:var(--accent)">★</span> first author &nbsp; <span style="color:var(--accent)">☆</span> co-first author. Full list on <a href="https://scholar.google.com/citations?user=2-4S3q4AAAAJ" target="_blank" rel="noopener">Google Scholar</a>.</p>
+    </section>
+
+    <section id="talks" aria-labelledby="talks-h">
+      <p class="eyebrow">Talks</p>
+      <h2 id="talks-h">Presentations and invited lectures</h2>
+      <div class="talk-gallery">
+        <figure class="shot"><img src="talk-isee2026.jpg" alt="Haonan Li presenting at the ISEE 2026 conference podium in Munich" loading="lazy" width="1200" height="750"><figcaption>Oral presentation · ISEE 2026, Munich</figcaption></figure>
+        <figure class="shot"><img src="talk-isee2025.jpg" alt="Haonan Li presenting fine particulate matter mixtures research at ISES–ISEE 2025 in Atlanta" loading="lazy" width="1200" height="750"><figcaption>Oral presentation · ISES–ISEE 2025, Atlanta</figcaption></figure>
+        <figure class="shot poster"><img src="talk-isaacs2026.jpg" alt="Announcement for the Leslie Isaacs Special Lecture on the microbiome by Haonan Li, July 14, 2026" loading="lazy" width="1200" height="900"><figcaption>Leslie Isaacs Special Lecture · Johns Hopkins, Jul 2026</figcaption></figure>
+        <figure class="shot poster"><img src="talk-boya2026.jpg" alt="Poster for the Boya International Forum talk by Dr. Tanya L. Alderete and Dr. Haonan Li at Peking University, September 13, 2026" loading="lazy" width="1200" height="900"><figcaption>Boya International Forum · Peking University, Sep 2026</figcaption></figure>
+      </div>
+      <ul class="rows">
+        <li><span class="when">2026</span><span>Early-life health effects of PFAS in human milk: Impacts on milk composition, the infant gut microbiome, and neurodevelopment (with T.L. Alderete) <span class="pill">Invited</span><span class="sub">Boya International Forum on Environmental Research, College of Environmental Sciences and Engineering, Peking University · Sep 13</span></span></li>
+        <li><span class="when">2026</span><span>Longitudinal gut microbiome and fecal metabolome signatures linking prenatal fine particulate matter component mixture exposure and child neurodevelopment <span class="pill">Oral</span><span class="sub">ISEE 2026, 38th Annual Conference, Munich, Germany · Aug 30–Sep 2</span></span></li>
+        <li><span class="when">2026</span><span>Early-life health effects of PFAS in human milk: Impacts on milk composition, the infant gut microbiome, and neurodevelopment <span class="pill">Invited</span><span class="sub">The Leslie Isaacs Special Lecture: Microbiome, Sherrilyn and Ken Fisher Center for Environmental Infectious Diseases, Johns Hopkins Medicine · Jul 14</span></span></li>
+        <li><span class="when">2026</span><span>Ambient fine particulate matter components and liver fat and stiffness in adolescents: Metabolic mechanisms and PNPLA3 genotype-specific associations <span class="pill">Poster</span><span class="sub">HEI Annual Conference, Chicago; ISEE-NAC Conference, Baltimore</span></span></li>
+        <li><span class="when">2025</span><span>Associations of fine particulate matter components with neurodevelopment in early childhood: Evidence from mixture approaches <span class="pill">Oral</span><span class="sub">ISES–ISEE 2025 Joint Annual Meeting, Atlanta, GA · Aug 18</span></span></li>
+      </ul>
+    </section>
+
+
+    <section id="service" aria-labelledby="svc-h">
+      <p class="eyebrow">Service &amp; mentoring</p>
+      <h2 id="svc-h">Service, teaching, and mentoring</h2>
+      <div class="cols">
+        <div>
+          <h3>Peer review</h3>
+          <ul class="plain">
+            <li>Environmental Health Perspectives</li>
+            <li>Journal of Hazardous Materials</li>
+            <li>Journal of Exposure Science &amp; Environmental Epidemiology</li>
+            <li>Journal of Child Psychology and Psychiatry</li>
+            <li>Frontiers in Public Health</li>
+          </ul>
+          <h3 style="margin-top:28px">Grant review</h3>
+          <ul class="plain">
+            <li>Pilot Project Program, Southern California Center for Latino Health <span class="sub">· 2025</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Teaching</h3>
+          <ul class="plain">
+            <li>Guest lecture, Exposure Sciences and Environmental Epidemiology (graduate course) <span class="sub">· Johns Hopkins, 2026</span></li>
+            <li>Teaching assistant, Environmental Sciences (80–100 undergraduates) <span class="sub">· Peking University, 2019, 2021, 2022</span></li>
+          </ul>
+          <h3 style="margin-top:28px">Mentoring</h3>
+          <ul class="plain">
+            <li>Doctoral student, Peking University <span class="sub">· 2024–present</span></li>
+            <li>Doctoral student, University of Cambridge <span class="sub">· 2024–2025</span></li>
+            <li>Peer mentorship for two postdoctoral researchers, Johns Hopkins <span class="sub">· 2025–present</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="Outside research" data-group="about">
+      <div class="outdoors">
+        <p class="eyebrow" style="margin:0">Outside research</p>
+        <p>Outside of research, I spend as much time outdoors as I can, hiking trails and photographing the landscapes, plants, and wildlife I come across along the way.</p>
+      </div>
+    </section>
+
+    <footer>© 2026 Haonan Li · Baltimore, Maryland</footer>
+  </main>
+</div>
+
+<script>
+const PUBS=[
+ {y:"In press",m:1,a:"Li H, Chen X, Xu Y, Wang T, Yao Y, Chen W, Gong J, Qiu X, Zhu T",t:"Association between ambient temperature and thrombosis-related signaling lipids: Implications for early cardiovascular risk",j:"Journal of Exposure Science & Environmental Epidemiology"},
+ {y:2026,m:1,a:"Li H, Schenker RB, Marquess KM, Paudel D, Ramirez CB, Lurmann F, Ren M, Jang C, Allayee H, Liao J, Chen Z, Goran MI, Alderete TL",t:"Ambient fine particulate matter components and liver fat and stiffness in youth: Metabolic vulnerability in PNPLA3 risk carriers",j:"Environment International",v:"215: 110438",d:"10.1016/j.envint.2026.110438"},
+ {y:2026,m:1,a:"Li H, Holzhausen EA, Paudel D, Young ND, Ottino-González J, Lurmann FW, Walker DI, Chang HH, Liang D, Bansal R, Goran MI, Peterson BS, Alderete TL",t:"Associations of prenatal fine particulate matter mixtures with neurodevelopmental outcomes in early childhood: Component- and source-specific insights",j:"Particle and Fibre Toxicology",v:"23: 14",d:"10.1186/s12989-025-00657-2"},
+ {y:2026,a:"Ottino-González J, Adise S, Descarpentrie A, Esaian S, Marquess KM, Paudel D, Li H, Alderete TL, Bansal R, Peterson BS, Goran MI",t:"Early-life cumulative intake of ultra-processed foods and subcortical brain volume at age 6 y: A prospective cohort study",j:"American Journal of Clinical Nutrition",v:"124(2): 101350",d:"10.1016/j.ajcnut.2026.101350"},
+ {y:2026,a:"Qiao R, Hua Q, Li J, Shi Y, Chen W, Chai Q, Fan Y, Li A, Li H, Meng X, et al.",t:"Indoor exposure to ozone-derived carbonyls: Association with indicators of blood and cardiovascular physiology among healthy young adults",j:"Environmental Science & Technology Air",v:"3(2): 517–527",d:"10.1021/acsestair.5c00369"},
+ {y:2025,m:1,a:"Li H, Han Y, Chen W, Wang Y, Xu Y, Wang T, Gong J, Li W, Zhang H, Wang J, Qiu X, Zhu T",t:"Lysoglycerophospholipid metabolism alterations associated with ambient fine particulate matter exposure: Insights into the pro-atherosclerotic effects",j:"Environmental Pollution",v:"367: 125646",d:"10.1016/j.envpol.2025.125646"},
+ {y:2025,a:"Paudel D, Li H, Holzhausen EA, Young N, Platz EA, Walker DI, Liang D, Aung M, Goodrich JA, Setiawan VW, Le Marchand L, Huang BZ, Conti DV, Chatzi L, Alderete TL",t:"A scoping review on per- and poly-fluoroalkyl substances (PFAS) and colorectal cancer: Evidence from in vitro, animal, and epidemiological studies",j:"Environment International",v:"203: 109778",d:"10.1016/j.envint.2025.109778",r:1},
+ {y:2025,a:"Xu Y, Han Y, Chen W, Li H, Wang Y, Chatzidiakou L, Gong J, Wang T, Zhang H, Yan L, et al.",t:"Nonoptimal temperature exposure and sphingolipid metabolism: Implications for cardiovascular risk",j:"Environmental Science & Technology",v:"59(41): 21885–21897",d:"10.1021/acs.est.5c07999"},
+ {y:2025,a:"Wang T, Chen X, Yao Y, Chen W, Li H, Xu Y, Guan T, Gong J, Qiu X, Zhu T",t:"Pro-thrombotic changes in response to ambient ozone exposure exacerbated by temperatures",j:"Environmental Science & Technology",v:"59(17): 8391–8401",d:"10.1021/acs.est.4c13457"},
+ {y:2025,a:"Hua Q, Meng X, Chen W, Xu Y, Xu R, Shi Y, Li J, Meng X, Li A, Chai Q, et al.",t:"Associations of short-term ozone exposure with hypoxia and arterial stiffness",j:"Journal of the American College of Cardiology",v:"85(6): 606–621",d:"10.1016/j.jacc.2024.11.044"},
+ {y:2024,a:"Gao K, Wang L, Xu Y, Zhang Y, Li H, Fu J, Fu J, Lu L, Qiu X, Zhu T",t:"Concentration identification and endpoint-oriented health risk assessments on a broad-spectrum of organic compounds in atmospheric fine particles: A sampling experimental study in Beijing, China",j:"Science of the Total Environment",v:"906: 167574",d:"10.1016/j.scitotenv.2023.167574"},
+ {y:2024,a:"Tao C, Zhu T, Fu D, Yan B, Li H",t:"Toward better atmospheric polycyclic aromatic hydrocarbons pollution control in the Northern Hemisphere: Process analysis based on interpretable deep learning models",j:"Journal of Cleaner Production",v:"457: 142442",d:"10.1016/j.jclepro.2024.142442"},
+ {y:2024,a:"Qiao R, Chen W, Shi Y, Chai Q, Fan Y, Hua Q, Li A, Li H, Li J, Meng X, et al.",t:"A comparative analysis on indoor and outdoor PM2.5 and their hourly associations with acute respiratory inflammation among college students in Lhasa",j:"Environmental Science & Technology",v:"58: 22668–22677",d:"10.1021/acs.est.4c04304"},
+ {y:2024,a:"Chen W, Han Y, Xu Y, Wang T, Wang Y, Chen X, Qiu X, Li W, Li H, Fan Y, Yao Y, Zhu T",t:"Fine particulate matter exposure and systemic inflammation: A potential mediating role of bioactive lipids",j:"Science of the Total Environment",v:"931: 172993",d:"10.1016/j.scitotenv.2024.172993"},
+ {y:2024,a:"Meng X, Hua Q, Xu R, Shi Y, Zhang Y, Yan M, Chen W, Xu Y, Fan Y, Yao Y, et al.",t:"A prospective study on the cardiorespiratory effects of air pollution among residents of the Tibetan Plateau",j:"Hygiene and Environmental Health Advances",v:"12: 100115",d:"10.1016/j.heha.2024.100115"},
+ {y:2023,m:1,a:"Li H, Han Y, Wang T, Chen W, Xu Y, Gao K, Wang Y, Gong J, Li W, Zhang H, Wang J, Qiu X, Zhu T",t:"Development and validation of a simple and rapid HILIC-MS/MS method for the quantification of low-abundant lysoglycerophospholipids in human plasma",j:"Analytical and Bioanalytical Chemistry",v:"415(3): 411–425",d:"10.1007/s00216-022-04421-9"},
+ {y:2023,a:"Wang T, Han Y, Chen X, Chen W, Li H, Wang Y, Qiu X, Gong J, Li W, Zhu T",t:"Particulate air pollution and blood pressure: Signaling by the arachidonate metabolism",j:"Hypertension",v:"80(12): 2687–2696",d:"10.1161/HYPERTENSIONAHA.123.21410"},
+ {y:2022,m:2,a:"Xu Y#, Li H#, Han Y, Wang T, Wang Y, Gong J, Gao K, Chen W, Li W, Zhang H, Wang J, Qiu X, Zhu T",t:"A simple and rapid method for extraction and measurement of circulating sphingolipids using LC–MS/MS: A targeted lipidomic analysis",j:"Analytical and Bioanalytical Chemistry",v:"414(6): 2041–2054",d:"10.1007/s00216-021-03853-z"},
+ {y:2022,a:"Wang T, Chen X, Li H, Chen W, Xu Y, Yao Y, Zhang H, Han Y, Zhang L, Que C, Gong J, Qiu X, Zhu T",t:"Pro-thrombotic changes associated with exposure to ambient ultrafine particles in patients with chronic obstructive pulmonary disease: Roles of lipid peroxidation and systemic inflammation",j:"Particle and Fibre Toxicology",v:"19(1): 65",d:"10.1186/s12989-022-00503-9"},
+ {y:2022,a:"Wang T, Han Y, Li H, Fang Y, Liang P, Wang Y, Chen X, Qiu X, Gong J, Li W, Zhu T",t:"Fine particulate matter and vasoactive 20-hydroxyeicosatetraenoic acid: Insights into the mechanisms of the prohypertensive effects of particulate air pollution",j:"Science of the Total Environment",v:"805: 151298",d:"10.1016/j.scitotenv.2021.151298"},
+ {y:2022,a:"Xu Y, Han Y, Wang Y, Gong J, Li H, Wang T, Chen X, Chen W, Fan Y, Qiu X, Wang J, Xue T, Li W, Zhu T",t:"Ambient air pollution and atherosclerosis: A potential mediating role of sphingolipids",j:"Arteriosclerosis, Thrombosis, and Vascular Biology",v:"42(7): 906–918",d:"10.1161/ATVBAHA.122.317753"},
+ {y:2022,a:"Xu Y, Chen X, Han Y, Chen W, Wang T, Gong J, Fan Y, Zhang H, Zhang L, Li H, et al.",t:"Ceramide metabolism mediates the impaired glucose homeostasis following short-term black carbon exposure: A targeted lipidomic analysis",j:"Science of the Total Environment",v:"829: 154657",d:"10.1016/j.scitotenv.2022.154657"},
+ {y:2021,a:"Wang T, Han Y, Li H, Wang Y, Chen X, Chen W, Qiu X, Gong J, Li W, Zhu T",t:"Proinflammatory lipid signals trigger the health effects of air pollution in individuals with prediabetes",j:"Environmental Pollution",v:"290: 118008",d:"10.1016/j.envpol.2021.118008"},
+ {y:2021,a:"Wang T, Han Y, Li H, Wang Y, Xue T, Chen X, Chen W, Fan Y, Qiu X, Gong J, Xu Y, Wang J, Li W, Zhu T",t:"Changes in bioactive lipid mediators in response to short-term exposure to ambient air particulate matter: A targeted lipidomic analysis of oxylipin signaling pathways",j:"Environment International",v:"147: 106314",d:"10.1016/j.envint.2020.106314"},
+ {y:2021,a:"Liu J, Chen X, Qiu X, Zhang H, Lu X, Li H, Chen W, Zhang L, Que C, Zhu T",t:"Association between exposure to polycyclic aromatic hydrocarbons and lipid peroxidation in patients with chronic obstructive pulmonary disease",j:"Science of the Total Environment",v:"780: 146660",d:"10.1016/j.scitotenv.2021.146660"},
+ {y:2020,a:"Wang T, Li H, Han Y, Wang Y, Gong J, Gao K, Li W, Zhang H, Wang J, Qiu X, Zhu T",t:"A rapid and high-throughput approach to quantify non-esterified oxylipins for epidemiological studies using online SPE-LC-MS/MS",j:"Analytical and Bioanalytical Chemistry",v:"412(28): 7989–8001",d:"10.1007/s00216-020-02931-y"}
+];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function render(firstOnly){
+  const list=PUBS.filter(p=>!firstOnly||p.m);
+  const out=[];let cur=null;
+  list.forEach(p=>{
+    if(p.y!==cur){ if(cur!==null) out.push("</ol>"); cur=p.y; out.push(`<p class="year">${esc(p.y)}</p><ol class="pubs">`); }
+    const authors=esc(p.a).replace(/Li H(#?)/,"<b>Li H$1</b>");
+    const mk=p.m===1?"★":p.m===2?"☆":"";
+    const vol=p.v?`, ${esc(p.v)}`:"";
+    const doi=p.d?` <a class="doi" href="https://doi.org/${esc(p.d)}" target="_blank" rel="noopener">doi:${esc(p.d)}</a>`:"";
+    const rev=p.r?' <span class="pill">Review</span>':"";
+    out.push(`<li class="pub"><span class="mk" aria-hidden="true">${mk}</span><div><div class="t">${esc(p.t)}${rev}</div><div class="a">${authors}${p.a.includes("#")?" (# equal contribution)":""}</div><div><span class="j">${esc(p.j)}</span>${vol}.${doi}</div></div></li>`);
+  });
+  if(cur!==null) out.push("</ol>");
+  document.getElementById("publist").innerHTML=out.join("");
+}
+render(false);
+const fa=document.getElementById("f-all"), ff=document.getElementById("f-first");
+fa.addEventListener("click",()=>{fa.setAttribute("aria-pressed","true");ff.setAttribute("aria-pressed","false");render(false);});
+ff.addEventListener("click",()=>{ff.setAttribute("aria-pressed","true");fa.setAttribute("aria-pressed","false");render(true);});
+document.getElementById("copyBtn").addEventListener("click",e=>{
+  const btn=e.currentTarget, txt=document.getElementById("addr").textContent;
+  const done=()=>{btn.textContent="Copied";setTimeout(()=>btn.textContent="Copy",1600);};
+  const fallback=()=>{const r=document.createRange();r.selectNodeContents(document.getElementById("addr"));const s=getSelection();s.removeAllRanges();s.addRange(r);};
+  try{ navigator.clipboard.writeText(txt).then(done,fallback); }catch(_){ fallback(); }
+});
+
+document.querySelectorAll(".carousel").forEach(c=>{
+  const track=c.querySelector(".car-track"), slides=[...track.querySelectorAll(".slide")];
+  const prev=c.querySelector(".prev"), next=c.querySelector(".next"), dots=c.querySelector(".car-dots"), count=c.querySelector(".car-count");
+  if(slides.length<2){ prev.hidden=next.hidden=true; c.querySelector(".car-foot").hidden=true; return; }
+  slides.forEach((s,i)=>{ s.setAttribute("aria-label",`${i+1} of ${slides.length}`);
+    const d=document.createElement("button"); d.type="button"; d.setAttribute("role","tab"); d.setAttribute("aria-label",`Photo ${i+1}`);
+    d.addEventListener("click",()=>go(i)); dots.appendChild(d); });
+  let idx=0;
+  const go=i=>{ i=Math.max(0,Math.min(slides.length-1,i)); track.scrollTo({left:slides[i].offsetLeft-track.offsetLeft,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"}); };
+  const update=()=>{ idx=track.clientWidth?Math.round(track.scrollLeft/track.clientWidth):0;
+    [...dots.children].forEach((d,i)=>d.setAttribute("aria-selected",i===idx?"true":"false"));
+    prev.disabled=idx===0; next.disabled=idx===slides.length-1; count.textContent=`${idx+1} / ${slides.length}`; };
+  prev.addEventListener("click",()=>go(idx-1)); next.addEventListener("click",()=>go(idx+1));
+  track.addEventListener("keydown",e=>{ if(e.key==="ArrowLeft"){e.preventDefault();go(idx-1);} if(e.key==="ArrowRight"){e.preventDefault();go(idx+1);} });
+  let t; track.addEventListener("scroll",()=>{ clearTimeout(t); t=setTimeout(update,60); },{passive:true});
+  addEventListener("resize",()=>{ if(track.clientWidth){ track.style.scrollBehavior="auto"; go(idx); track.style.scrollBehavior=""; update(); } });
+  update();
+});
+
+(()=>{const b=document.getElementById("newsMore"); if(!b) return; const more=[...document.querySelectorAll(".news .more")]; const label=b.textContent;
+ if(!more.length){b.hidden=true;return;}
+ b.addEventListener("click",()=>{const open=b.getAttribute("aria-expanded")==="true"; more.forEach(li=>li.hidden=open); b.setAttribute("aria-expanded",String(!open)); b.textContent=open?label:"Show fewer";});})();
+
+(()=>{const box=document.getElementById("sideNews"); if(!box) return;
+ [...document.querySelectorAll(".news li")].slice(0,4).forEach(li=>{
+   const d=li.querySelector(".when").textContent, body=li.querySelector(".when").nextElementSibling.cloneNode(true);
+   body.querySelector(".ntag")?.remove(); body.querySelectorAll("a").forEach(a=>a.replaceWith(...a.childNodes));
+   const o=document.createElement("li"); o.innerHTML=`<span class="d"></span><span class="x"></span>`;
+   o.querySelector(".d").textContent=d; o.querySelector(".x").innerHTML=body.innerHTML; box.appendChild(o); });})();
+(()=>{const links=[...document.querySelectorAll(".topnav a")]; const secs=[...document.querySelectorAll("main > section")];
+ const ids=[...links.map(a=>a.getAttribute("href").slice(1)),"news","publications","training"]; const alias={publications:"research",training:"experience"};
+ const show=(id,scroll)=>{ if(!ids.includes(id)) id="about"; const target=id; id=alias[id]||id;
+   secs.forEach(sec=>{ sec.hidden=!((sec.dataset.group||sec.id)===id); });
+   links.forEach(a=>{ const on=a.getAttribute("href")==="#"+id; a.classList.toggle("active",on); if(on){a.setAttribute("aria-current","page"); a.scrollIntoView({block:"nearest",inline:"nearest"});} else a.removeAttribute("aria-current"); });
+   if(target!==id){ const el=document.getElementById(target); if(el) el.scrollIntoView(); } else if(scroll) window.scrollTo({top:0,behavior:"auto"});
+   dispatchEvent(new Event("resize")); };
+ document.addEventListener("click",e=>{ const a=e.target.closest('a[href^="#"]'); if(!a) return; const id=a.getAttribute("href").slice(1); if(!ids.includes(id)) return;
+   e.preventDefault(); try{ history.pushState(null,"","#"+id); }catch(_){} show(id,true); });
+ addEventListener("popstate",()=>show(location.hash.slice(1),true));
+ addEventListener("hashchange",()=>show(location.hash.slice(1),true));
+ show(location.hash.slice(1),false); })();
+</script>
+
+</body>
+</html>
