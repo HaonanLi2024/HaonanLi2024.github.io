@@ -196,6 +196,54 @@ main > section{animation:fadein .2s ease}
 @media (prefers-reduced-motion: reduce){ main > section{animation:none} }
 footer{border-top:1px solid var(--line);padding-top:16px;font:400 .85rem/1.5 var(--sans);color:var(--muted)}
 .contact-address{margin:0;color:var(--muted);font:400 .88rem/1.5 var(--sans);overflow-wrap:break-word}
+
+.contact-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:stretch}
+.contact-map{margin:0;min-width:0;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:3px;overflow:hidden;background:var(--surface)}
+.contact-map iframe{display:block;width:100%;min-height:360px;flex:1;border:0}
+.contact-map figcaption{padding:12px 14px;font:400 .85rem/1.5 var(--sans);color:var(--muted)}
+@media(max-width:640px){.contact-layout{grid-template-columns:minmax(0,1fr)}.contact-map iframe{height:320px;min-height:320px}}
+.contact-panel{padding:26px;background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:3px}
+.contact-panel h3{font-size:1.35rem;margin-bottom:12px}
+.contact-panel p{margin-bottom:18px}
+.contact-email{display:inline-block;padding:10px 18px;background:var(--accent);color:var(--bg);font:600 .95rem/1.4 var(--sans);text-decoration:none;border-radius:3px}
+.contact-location{margin-top:26px;padding-top:22px;border-top:1px solid var(--line)}
+.contact-location address{font:400 .95rem/1.6 var(--sans);color:var(--muted);margin:10px 0}
+
+/* Gentle color accents for Contact, adapting to the active theme. */
+#contact{--contact-blue:#416FA6;--contact-teal:#318B85}
+#contact>h2{border-bottom-color:color-mix(in srgb,var(--contact-teal) 45%,var(--line));color:var(--accent)}
+#contact .contact-panel{background:linear-gradient(145deg,color-mix(in srgb,var(--contact-blue) 10%,var(--surface)),color-mix(in srgb,var(--contact-teal) 8%,var(--surface)));border-color:color-mix(in srgb,var(--contact-teal) 32%,var(--line));border-top-color:var(--contact-teal);box-shadow:0 6px 22px rgba(31,63,115,.06)}
+#contact .contact-panel h3{color:var(--accent)}
+#contact .contact-email{background:linear-gradient(110deg,#285787,#27766F);color:#fff;box-shadow:0 3px 10px rgba(31,63,115,.14);transition:filter .15s ease}
+#contact .contact-email:hover{filter:brightness(1.12)}
+#contact .contact-location{border-top-color:color-mix(in srgb,var(--contact-teal) 30%,var(--line))}
+#contact .contact-map{border-color:color-mix(in srgb,var(--contact-blue) 35%,var(--line));border-top:3px solid var(--contact-blue);box-shadow:0 6px 22px rgba(31,63,115,.06)}
+#contact .contact-map figcaption{background:color-mix(in srgb,var(--contact-blue) 10%,var(--surface));color:var(--ink)}
+
+/* Pastel scientific illustration behind the contact invitation. */
+#contact .contact-panel{position:relative;isolation:isolate;overflow:hidden;border-top-color:#8c80bd;background:var(--surface)}
+#contact .contact-panel::before{content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(ellipse at 0% 0%,rgba(88,174,222,.27),transparent 52%),radial-gradient(ellipse at 100% 12%,rgba(173,130,219,.26),transparent 50%),radial-gradient(ellipse at 95% 90%,rgba(246,171,102,.26),transparent 50%),radial-gradient(ellipse at 5% 90%,rgba(84,194,159,.24),transparent 50%),radial-gradient(ellipse at 50% 48%,rgba(232,145,176,.14),transparent 60%)}
+#contact .contact-panel::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22700%22%20height%3D%22800%22%20viewBox%3D%220%200%20700%20800%22%3E%3Cg%20fill%3D%22none%22%20stroke-width%3D%222%22%3E%3Cg%20stroke%3D%22%236e9350%22%3E%3Cpath%20d%3D%22M420%2070L480%20105L480%20175L420%20210L360%20175L360%20105Z%20M480%20175L540%20210L600%20175%20M360%20105L300%2070%22%2F%3E%3Ccircle%20cx%3D%22420%22%20cy%3D%2270%22%20r%3D%229%22%20fill%3D%22%239fbd6e%22%2F%3E%3Ccircle%20cx%3D%22540%22%20cy%3D%22210%22%20r%3D%2212%22%20fill%3D%22%23dc9476%22%2F%3E%3Ccircle%20cx%3D%22300%22%20cy%3D%2270%22%20r%3D%227%22%20fill%3D%22%238db779%22%2F%3E%3C%2Fg%3E%3Cg%20stroke%3D%22%2385a952%22%3E%3Cpath%20d%3D%22M-30%20500C130%20350%20200%20650%20380%20480S600%20390%20740%20550%20M-30%20525C130%20375%20200%20675%20380%20505S600%20415%20740%20575%20M-30%20550C130%20400%20200%20700%20380%20530S600%20440%20740%20600%22%2F%3E%3C%2Fg%3E%3Cg%20stroke%3D%22%23cf796b%22%3E%3Ccircle%20cx%3D%2285%22%20cy%3D%22250%22%20r%3D%2255%22%2F%3E%3Ccircle%20cx%3D%2285%22%20cy%3D%22250%22%20r%3D%2235%22%2F%3E%3Cpath%20d%3D%22M85%20195V180%20M140%20250H155%20M85%20305V320%20M30%20250H15%22%2F%3E%3C%2Fg%3E%3Cg%20stroke%3D%22%23729a62%22%3E%3Cpath%20d%3D%22M500%20650L570%20690L640%20650M570%20690V765%22%2F%3E%3Ccircle%20cx%3D%22500%22%20cy%3D%22650%22%20r%3D%2214%22%2F%3E%3Ccircle%20cx%3D%22640%22%20cy%3D%22650%22%20r%3D%2210%22%2F%3E%3Ccircle%20cx%3D%22570%22%20cy%3D%22765%22%20r%3D%2212%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");background-size:cover;background-position:center;opacity:.17}
+#contact .contact-panel h3{color:var(--ink)}
+#contact .contact-email{background:linear-gradient(110deg,#345a94,#6d5595 53%,#257b75)}
+#contact .contact-map{border-top-color:#b08bc7}
+#contact .contact-map figcaption{background:linear-gradient(110deg,color-mix(in srgb,#76bce1 16%,var(--surface)),color-mix(in srgb,#b797d8 15%,var(--surface)),color-mix(in srgb,#eebc8b 15%,var(--surface)))}
+
+/* Green and warm yellow palette for Contact. */
+#contact{--contact-blue:#719447;--contact-teal:#66894b}
+#contact>h2{color:var(--ink);border-bottom-color:color-mix(in srgb,#99ad5a 55%,var(--line))}
+#contact .contact-panel{border-color:color-mix(in srgb,#9caf65 45%,var(--line));border-top-color:#87a654;box-shadow:0 6px 22px rgba(80,106,42,.07)}
+#contact .contact-panel::before{background:radial-gradient(ellipse at 0% 0%,rgba(139,186,105,.30),transparent 55%),radial-gradient(ellipse at 100% 12%,rgba(240,209,101,.30),transparent 52%),radial-gradient(ellipse at 95% 90%,rgba(218,189,94,.24),transparent 50%),radial-gradient(ellipse at 5% 90%,rgba(131,182,111,.25),transparent 52%),radial-gradient(ellipse at 50% 48%,rgba(225,225,143,.18),transparent 60%)}
+#contact .contact-email{background:linear-gradient(110deg,#385f36,#557638);color:#fff;box-shadow:0 3px 10px rgba(65,95,35,.17)}
+#contact .contact-location{border-top-color:color-mix(in srgb,#93a35a 40%,var(--line))}
+#contact .contact-map{border-color:color-mix(in srgb,#afba6a 45%,var(--line));border-top-color:#c5ad50;box-shadow:0 6px 22px rgba(80,106,42,.07)}
+#contact .contact-map figcaption{background:linear-gradient(110deg,color-mix(in srgb,#a4ca7f 22%,var(--surface)),color-mix(in srgb,#f0d67e 25%,var(--surface)))}
+#contact .contact-location a,#contact .contact-map a{color:var(--ink);text-decoration-color:#85a654}
+
+/* Green, yellow, and coral accents. */
+#contact .contact-panel::before{background:radial-gradient(ellipse at 0% 0%,rgba(139,186,105,.32),transparent 55%),radial-gradient(ellipse at 100% 0%,rgba(240,209,101,.34),transparent 54%),radial-gradient(ellipse at 100% 100%,rgba(226,126,108,.28),transparent 58%),radial-gradient(ellipse at 0% 100%,rgba(131,182,111,.24),transparent 50%),radial-gradient(ellipse at 50% 48%,rgba(242,217,143,.17),transparent 60%)}
+#contact .contact-map{border-top-color:#c78068}
+#contact .contact-map figcaption{background:linear-gradient(110deg,color-mix(in srgb,#a4ca7f 22%,var(--surface)),color-mix(in srgb,#f0d67e 25%,var(--surface)),color-mix(in srgb,#e69582 22%,var(--surface)))}
 </style>
 </head>
 <body>
@@ -210,6 +258,7 @@ footer{border-top:1px solid var(--line);padding-top:16px;font:400 .85rem/1.5 var
       <a href="#research">Research &amp; Publications</a>
       <a href="#talks">Talks</a>
       <a href="#service">Service &amp; Mentoring</a>
+      <a href="#contact">Contact</a>
     </nav>
   </div>
 </header>
@@ -256,9 +305,9 @@ footer{border-top:1px solid var(--line);padding-top:16px;font:400 .85rem/1.5 var
       <p class="eyebrow">About</p>
       <div class="prose">
         <p class="lede" id="about-h">I study how environmental exposures alter <em>microbial and metabolic processes</em> to shape neurological and cardiometabolic health.</p>
-        <p>I am a postdoctoral fellow in the Department of Environmental Health and Engineering at the Johns Hopkins Bloomberg School of Public Health, working with Associate Professor <a href="https://publichealth.jhu.edu/faculty/4819/tanya-alderete" target="_blank" rel="noopener">Tanya L. Alderete</a> in the <a href="https://eclipselab.science/" target="_blank" rel="noopener">ECLIPSE Lab</a>. My research integrates environmental epidemiology with multi-omics, including signaling lipidomics, metabolomics, and gut microbiome profiling, to investigate how environmental exposures shape human health in longitudinal cohorts.</p>
-        <p>My path into environmental health began with a fascination for living systems. At Xiamen University, I trained in marine biology and studied extracellular vesicles released by marine bacteria. At Peking University, under the mentorship of <a href="http://scholar.pku.edu.cn/tongzhu" target="_blank" rel="noopener">Professor Tong Zhu</a>, I developed LC-MS/MS methods to quantify low-abundance signaling lipids and applied them in longitudinal panel studies of middle-aged and older adults to investigate how air pollution and ambient temperature alter pathways involved in inflammation, thrombosis, and atherosclerosis. This training spanned the full environmental health research process, from designing field panel studies and monitoring air pollution to processing biospecimens, operating LC-MS instruments, and conducting statistical analyses.</p>
-        <p>At Johns Hopkins, I have expanded my research to birth cohorts, examining air pollution constituents and sources, per- and polyfluoroalkyl substances (PFAS), and the broader chemical exposome in relation to human milk composition, metabolomic profiles, the infant gut microbiome, and neurodevelopment. I contribute to several studies funded by the National Institutes of Health (NIH) and am a member of the <a href="https://echochildren.org/" target="_blank" rel="noopener">Environmental influences on Child Health Outcomes (ECHO)</a> <a href="https://www.nih.gov/echo/program-components/echo-data-analysis-center" target="_blank" rel="noopener">Data Analysis Center</a> and the <a href="https://www.jhu-charmed.com/" target="_blank" rel="noopener">Johns Hopkins NIEHS P30 CHARMED Center</a>.</p>
+        <p>I’m a postdoctoral fellow in the Department of Environmental Health and Engineering at the Johns Hopkins Bloomberg School of Public Health, working with Associate Professor <a href="https://publichealth.jhu.edu/faculty/4819/tanya-alderete" target="_blank" rel="noopener">Tanya L. Alderete</a> in the <a href="https://eclipselab.science/" target="_blank" rel="noopener">ECLIPSE Lab</a>. I bring together environmental epidemiology, signaling lipidomics, metabolomics, and gut microbiome profiling to explore the biological processes linking environmental exposures to health. What excites me most is connecting what we observe in human populations with what is happening at the microbial and molecular level.</p>
+        <p>My path into environmental health started with a fascination for living systems and a desire to understand how they respond to their surroundings. At Xiamen University, I trained in marine biology and studied extracellular vesicles released by marine bacteria. At Peking University, under the mentorship of <a href="http://scholar.pku.edu.cn/tongzhu" target="_blank" rel="noopener">Professor Tong Zhu</a>, I developed LC-MS/MS methods to quantify low-abundance signaling lipids and applied them in longitudinal panel studies of middle-aged and older adults to investigate how air pollution and ambient temperature alter pathways involved in inflammation, thrombosis, and atherosclerosis. Along the way, I gained hands-on experience across the research process, from designing field studies and monitoring air pollution to processing biospecimens, running LC-MS analyses, and conducting statistical analyses.</p>
+        <p>At Johns Hopkins, I’m building on this foundation to explore how environmental exposures shape health early in life, with a particular focus on neurodevelopment. Working with birth cohorts, I study air pollution constituents and sources, per- and polyfluoroalkyl substances (PFAS), and the broader chemical exposome in relation to human milk composition, metabolomic profiles, the infant gut microbiome, and neurodevelopment. My current work is expanding toward the integration of metabolomics, lipidomics, and microbiome profiling to investigate these interconnected processes (e.g., potential links between pollution exposure, gut microbial metabolism, and child neurodevelopment). I contribute to several studies funded by the National Institutes of Health (NIH) and am a member of the <a href="https://echochildren.org/" target="_blank" rel="noopener">Environmental influences on Child Health Outcomes (ECHO)</a> <a href="https://www.nih.gov/echo/program-components/echo-data-analysis-center" target="_blank" rel="noopener">Data Analysis Center</a> and the <a href="https://www.jhu-charmed.com/" target="_blank" rel="noopener">Johns Hopkins NIEHS P30 CHARMED Center</a>.</p>
       </div>
     </section>
 
@@ -562,6 +611,26 @@ footer{border-top:1px solid var(--line);padding-top:16px;font:400 .85rem/1.5 var
       </div>
     </section>
 
+    <section id="contact" data-group="service" aria-labelledby="contact-h">
+      <h2 id="contact-h">Contact</h2>
+      <div class="contact-layout">
+      <div class="contact-panel">
+        <h3>Let’s connect</h3>
+        <p>I’m always excited to meet people who are curious about how our environment shapes health. Have a research idea, a question about my work, or an opportunity to collaborate? I’d love to hear from you. Let’s exchange ideas and see what we can discover together!</p>
+        <a class="contact-email" href="mailto:hli263@jh.edu">Email me · hli263@jh.edu</a>
+        <div class="contact-location">
+          <h3>Office</h3>
+          <address>Johns Hopkins Bloomberg School of Public Health<br>615 N. Wolfe Street, Room E7035<br>Baltimore, MD 21205, USA</address>
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=615%20N.%20Wolfe%20Street%2C%20Baltimore%2C%20MD%2021205" target="_blank" rel="noopener">View on map →</a>
+        </div>
+      </div>
+      <figure class="contact-map">
+        <iframe title="Satellite map of Johns Hopkins Bloomberg School of Public Health" src="https://maps.google.com/maps?q=615%20N%20Wolfe%20St%2C%20Baltimore%2C%20MD%2021205&amp;t=k&amp;z=18&amp;hl=en&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        <figcaption>Johns Hopkins Bloomberg School of Public Health<br><a href="https://www.google.com/maps?q=615%20N%20Wolfe%20St%2C%20Baltimore%2C%20MD%2021205&amp;t=k&amp;z=18" target="_blank" rel="noopener">Open satellite map →</a></figcaption>
+      </figure>
+      </div>
+    </section>
+
     <footer>© 2026 Haonan Li · Baltimore, Maryland</footer>
   </main>
 </div>
@@ -653,7 +722,7 @@ document.querySelectorAll(".carousel").forEach(c=>{
    const o=document.createElement("li"); o.innerHTML=`<span class="d"></span><span class="x"></span>`;
    o.querySelector(".d").textContent=d; o.querySelector(".x").innerHTML=body.innerHTML; box.appendChild(o); });})();
 (()=>{const links=[...document.querySelectorAll(".topnav a")]; const secs=[...document.querySelectorAll("main > section")];
- const ids=[...links.map(a=>a.getAttribute("href").slice(1)),"news","publications","training"]; const alias={publications:"research",training:"experience"};
+ const ids=[...links.map(a=>a.getAttribute("href").slice(1)),"news","publications","training"]; const alias={publications:"research",training:"experience",contact:"service"};
  const show=(id,scroll)=>{ if(!ids.includes(id)) id="about"; const target=id; id=alias[id]||id;
    secs.forEach(sec=>{ sec.hidden=!((sec.dataset.group||sec.id)===id); });
    links.forEach(a=>{ const on=a.getAttribute("href")==="#"+id; a.classList.toggle("active",on); if(on){a.setAttribute("aria-current","page"); a.scrollIntoView({block:"nearest",inline:"nearest"});} else a.removeAttribute("aria-current"); });
