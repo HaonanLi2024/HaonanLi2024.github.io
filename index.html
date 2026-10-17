@@ -195,6 +195,7 @@ main > section{animation:fadein .2s ease}
 @keyframes fadein{from{opacity:.5}to{opacity:1}}
 @media (prefers-reduced-motion: reduce){ main > section{animation:none} }
 footer{border-top:1px solid var(--line);padding-top:16px;font:400 .85rem/1.5 var(--sans);color:var(--muted)}
+.contact-address{margin:0;color:var(--muted);font:400 .88rem/1.5 var(--sans);overflow-wrap:break-word}
 </style>
 </head>
 <body>
@@ -227,6 +228,12 @@ footer{border-top:1px solid var(--line);padding-top:16px;font:400 .85rem/1.5 var
       <span id="addr">hli263@jh.edu</span>
       <button class="copy" id="copyBtn" type="button" aria-label="Copy email address">Copy</button>
     </div>
+
+    <address class="contact-address" aria-label="Office address">
+      Johns Hopkins Bloomberg School of Public Health<br>
+      615 N. Wolfe Street, Room E7035<br>
+      Baltimore, MD 21205, USA
+    </address>
 
     <ul class="links">
       <li><a href="https://scholar.google.com/citations?user=2-4S3q4AAAAJ" target="_blank" rel="noopener">
