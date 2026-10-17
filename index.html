@@ -252,6 +252,20 @@ footer{border-top:1px solid var(--line);padding-top:16px;font:400 .85rem/1.5 var
 
 
 #about strong{font-weight:600}
+
+.pub{grid-template-columns:minmax(0,1fr)}
+.pub>.mk{display:none}
+.author-badge{display:inline-block;margin:4px 0 2px 8px;padding:2px 8px;border-radius:4px;font:600 .78rem/1.5 var(--sans);vertical-align:baseline;white-space:nowrap}
+.first-author{background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 30%,var(--line))}
+.co-first-author{background:color-mix(in srgb,var(--ink) 10%,var(--surface));color:var(--ink);border:1px solid color-mix(in srgb,var(--ink) 42%,var(--line))}
+
+.pub{grid-template-columns:1.2rem minmax(0,1fr)}
+.pub>.mk{display:block}
+.author-star{font-family:var(--sans);font-size:1rem}
+.first-star{color:#171717}
+.co-first-star{color:#909090}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .first-star{color:#eee}}
+:root[data-theme="dark"] .first-star{color:#eee}
 </style>
 </head>
 <body>
@@ -303,7 +317,8 @@ footer{border-top:1px solid var(--line);padding-top:16px;font:400 .85rem/1.5 var
         <p class="lede" id="about-h">I study how environmental exposures alter <em>microbial and metabolic processes</em> to shape neurological and cardiometabolic health.</p>
         <p>I’m a postdoctoral fellow in the Department of Environmental Health and Engineering at the Johns Hopkins Bloomberg School of Public Health, working with Associate Professor <a href="https://publichealth.jhu.edu/faculty/4819/tanya-alderete" target="_blank" rel="noopener">Tanya L. Alderete</a> in the <a href="https://eclipselab.science/" target="_blank" rel="noopener">ECLIPSE Lab</a>. I bring together <strong>environmental epidemiology, signaling lipidomics, metabolomics, and gut microbiome profiling</strong> to explore the biological processes linking environmental exposures to health. What excites me most is connecting what we observe in human populations with what is happening at the microbial and molecular level.</p>
         <p>My path into environmental health started with a fascination for living systems and a desire to understand how they respond to their surroundings. At Xiamen University, I trained in marine biology and studied extracellular vesicles released by marine bacteria. At Peking University, under the mentorship of <a href="http://scholar.pku.edu.cn/tongzhu" target="_blank" rel="noopener">Professor Tong Zhu</a>, I <strong>developed LC-MS/MS methods to quantify low-abundance signaling lipids</strong> and applied them in longitudinal panel studies of middle-aged and older adults to investigate how air pollution and ambient temperature alter pathways involved in inflammation, thrombosis, and atherosclerosis. Along the way, I gained hands-on experience across the research process, from designing field studies and monitoring air pollution to processing biospecimens, running LC-MS analyses, and conducting statistical analyses.</p>
-        <p>At Johns Hopkins, I’m building on this foundation to explore how environmental exposures shape health early in life, with a particular focus on neurodevelopment. Working with birth cohorts, I study air pollution constituents and sources, per- and polyfluoroalkyl substances (PFAS), and the broader chemical exposome in relation to human milk composition, metabolomic profiles, the infant gut microbiome, and neurodevelopment. My current work focuses on <strong>multi-omics integration</strong> to investigate these interconnected processes (e.g., using the fecal metabolome as a readout of gut microbial function to explore how microbiome-related metabolic changes may link pollution exposure to child neurodevelopment). I contribute to several studies funded by the National Institutes of Health (NIH) and am a member of the <a href="https://echochildren.org/" target="_blank" rel="noopener">Environmental influences on Child Health Outcomes (ECHO)</a> <a href="https://www.nih.gov/echo/program-components/echo-data-analysis-center" target="_blank" rel="noopener">Data Analysis Center</a> and the <a href="https://www.jhu-charmed.com/" target="_blank" rel="noopener">Johns Hopkins NIEHS P30 CHARMED Center</a>.</p>
+        <p>At Johns Hopkins, I’m building on this foundation to explore how environmental exposures shape health early in life, with a particular focus on neurodevelopment. Working with birth cohorts, I study air pollution constituents and sources, per- and polyfluoroalkyl substances (PFAS), and the broader chemical exposome in relation to human milk composition, metabolomic profiles, the infant gut microbiome, and neurodevelopment. My current work is shifting toward <strong>multi-omics integration</strong> to investigate these interconnected processes (e.g., using the fecal metabolome as a readout of gut microbial function to explore how microbiome-related metabolic changes may link pollution exposure to child neurodevelopment). I contribute to several studies funded by the National Institutes of Health (NIH) and am a member of the <a href="https://echochildren.org/" target="_blank" rel="noopener">Environmental influences on Child Health Outcomes (ECHO)</a> <a href="https://www.nih.gov/echo/program-components/echo-data-analysis-center" target="_blank" rel="noopener">Data Analysis Center</a> and the <a href="https://www.jhu-charmed.com/" target="_blank" rel="noopener">Johns Hopkins NIEHS P30 CHARMED Center</a>.</p>
+        <p><strong>My goal is to connect pollution sources, exposures, and health mechanisms, identify susceptible populations, and inform public health policy.</strong></p>
       </div>
     </section>
 
@@ -544,7 +559,7 @@ footer{border-top:1px solid var(--line);padding-top:16px;font:400 .85rem/1.5 var
         <button type="button" id="f-first" aria-pressed="false">First / co-first author</button>
       </div>
       <div id="publist"></div>
-      <p class="note"><span style="color:var(--accent)">★</span> first author &nbsp; <span style="color:var(--accent)">☆</span> co-first author. Full list on <a href="https://scholar.google.com/citations?user=2-4S3q4AAAAJ" target="_blank" rel="noopener">Google Scholar</a>.</p>
+      <p class="note"><span class="author-star first-star">★</span> first author &nbsp; <span class="author-star co-first-star">★</span> co-first author; # indicates equal contribution. Full list on <a href="https://scholar.google.com/citations?user=2-4S3q4AAAAJ" target="_blank" rel="noopener">Google Scholar</a>.</p>
     </section>
 
     <section id="talks" aria-labelledby="talks-h">
@@ -668,11 +683,11 @@ function render(firstOnly){
   list.forEach(p=>{
     if(p.y!==cur){ if(cur!==null) out.push("</ol>"); cur=p.y; out.push(`<p class="year">${esc(p.y)}</p><ol class="pubs">`); }
     const authors=esc(p.a).replace(/Li H(#?)/,"<b>Li H$1</b>");
-    const mk=p.m===1?"★":p.m===2?"☆":"";
+    const mk=p.m?`<span class="author-star ${p.m===1?'first-star':'co-first-star'}" role="img" aria-label="${p.m===1?'First author':'Co-first author'}" title="${p.m===1?'First author':'Co-first author'}">★</span>`:"";
     const vol=p.v?`, ${esc(p.v)}`:"";
     const doi=p.d?` <a class="doi" href="https://doi.org/${esc(p.d)}" target="_blank" rel="noopener">doi:${esc(p.d)}</a>`:"";
     const rev=p.r?' <span class="pill">Review</span>':"";
-    out.push(`<li class="pub"><span class="mk" aria-hidden="true">${mk}</span><div><div class="t">${esc(p.t)}${rev}</div><div class="a">${authors}${p.a.includes("#")?" (# equal contribution)":""}</div><div><span class="j">${esc(p.j)}</span>${vol}.${doi}</div></div></li>`);
+    out.push(`<li class="pub"><span class="mk">${mk}</span><div><div class="t">${esc(p.t)}${rev}</div><div class="a">${authors}${p.a.includes("#")?" (# equal contribution)":""}</div><div><span class="j">${esc(p.j)}</span>${vol}.${doi}</div></div></li>`);
   });
   if(cur!==null) out.push("</ol>");
   document.getElementById("publist").innerHTML=out.join("");
